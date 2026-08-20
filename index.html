@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mohab | Video Editor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #11100f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 80px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 6%;
+
+      background: rgba(17, 16, 15, 0.82);
+
+      backdrop-filter: blur(15px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #ffd400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #aaa;
+      font-size: 13px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd400;
+    }
+
+    .contact-btn {
+      background: #ffd400;
+      color: #111;
+
+      padding: 12px 20px;
+
+      border-radius: 4px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      transition: 0.3s;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 10px 30px rgba(255,212,0,0.2);
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+
+      padding: 120px 8% 80px;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .hero::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 600px;
+      height: 600px;
+
+      right: -250px;
+      top: 100px;
+
+      background: #ffd400;
+
+      filter: blur(200px);
+
+      opacity: 0.07;
+    }
+
+    .hero-content {
+
+      max-width: 900px;
+
+      position: relative;
+
+      z-index: 2;
+    }
+
+    .small-title {
+
+      color: #ffd400;
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      letter-spacing: 4px;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+
+      font-size: clamp(60px, 11vw, 150px);
+
+      line-height: 0.85;
+
+      letter-spacing: -7px;
+
+      font-weight: 900;
+
+      margin-bottom: 30px;
+    }
+
+    .hero h1 span {
+      color: #ffd400;
+    }
+
+    .hero p {
+
+      max-width: 570px;
+
+      color: #999;
+
+      font-size: 17px;
+
+      line-height: 1.8;
+
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+
+      display: flex;
+
+      gap: 15px;
+
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+
+      display: inline-block;
+
+      background: #ffd400;
+
+      color: #111;
+
+      padding: 16px 27px;
+
+      font-weight: 800;
+
+      border-radius: 4px;
+
+      transition: 0.3s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .secondary-btn {
+
+      display: inline-block;
+
+      border: 1px solid #444;
+
+      padding: 16px 27px;
+
+      color: #ddd;
+
+      font-weight: 700;
+
+      border-radius: 4px;
+
+      transition: 0.3s;
+    }
+
+    .secondary-btn:hover {
+
+      border-color: #ffd400;
+
+      color: #ffd400;
+
+      transform: translateY(-3px);
+    }
+
+
+    /* ================= MARQUEE ================= */
+
+    .marquee {
+
+      border-top: 1px solid #292725;
+
+      border-bottom: 1px solid #292725;
+
+      padding: 18px 0;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      color: #777;
+
+      font-size: 12px;
+
+      letter-spacing: 3px;
+
+      font-weight: 700;
+    }
+
+    .marquee-track {
+
+      display: inline-block;
+
+      animation: move 20s linear infinite;
+    }
+
+    .marquee span {
+
+      margin: 0 35px;
+    }
+
+    .marquee strong {
+
+      color: #ffd400;
+    }
+
+    @keyframes move {
+
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    /* ================= SECTIONS ================= */
+
+    section {
+
+      padding: 120px 8%;
+    }
+
+    .section-header {
+
+      display: flex;
+
+      align-items: end;
+
+      justify-content: space-between;
+
+      gap: 40px;
+
+      margin-bottom: 50px;
+    }
+
+    .section-number {
+
+      color: #ffd400;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      letter-spacing: 3px;
+
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+
+      font-size: clamp(40px, 6vw, 80px);
+
+      line-height: 0.9;
+
+      letter-spacing: -4px;
+
+      font-weight: 900;
+    }
+
+    .section-description {
+
+      max-width: 350px;
+
+      color: #777;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+
+    /* ================= VIDEO WORK ================= */
+
+    .works {
+
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 25px;
+    }
+
+    .work {
+
+      background: #1b1917;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,0.05);
+
+      transition: 0.35s;
+    }
+
+    .work:hover {
+
+      transform: translateY(-5px);
+
+      border-color: rgba(255,212,0,0.35);
+    }
+
+    .work video {
+
+      width: 100%;
+
+      display: block;
+
+      aspect-ratio: 16 / 9;
+
+      object-fit: cover;
+
+      background: #000;
+    }
+
+    .work-info {
+
+      padding: 22px 25px 25px;
+    }
+
+    .work-category {
+
+      color: #ffd400;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing: 2px;
+
+      margin-bottom: 8px;
+    }
+
+    .work-info h3 {
+
+      font-size: 24px;
+
+      font-weight: 800;
+    }
+
+
+    /* ================= COMMERCIAL ================= */
+
+    #commercial {
+
+      background: #0e0d0c;
+    }
+
+
+    /* ================= SERVICES ================= */
+
+    .services {
+
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      border-top: 1px solid #333;
+    }
+
+    .service {
+
+      padding: 40px 25px;
+
+      border-right: 1px solid #333;
+
+      transition: 0.3s;
+    }
+
+    .service:last-child {
+      border-right: none;
+    }
+
+    .service:hover {
+
+      background: #1b1917;
+    }
+
+    .service-number {
+
+      color: #ffd400;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      margin-bottom: 50px;
+    }
+
+    .service h3 {
+
+      font-size: 25px;
+
+      margin-bottom: 15px;
+    }
+
+    .service p {
+
+      color: #777;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+
+    /* ================= CTA ================= */
+
+    .cta {
+
+      text-align: center;
+
+      padding: 160px 20px;
+    }
+
+    .cta h2 {
+
+      font-size: clamp(50px, 9vw, 120px);
+
+      line-height: 0.9;
+
+      letter-spacing: -6px;
+
+      margin-bottom: 40px;
+    }
+
+    .cta h2 span {
+
+      color: #ffd400;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+
+      padding: 35px 8%;
+
+      border-top: 1px solid #292725;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      color: #666;
+
+      font-size: 12px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 800px) {
+
+      nav {
+
+        height: 70px;
+
+        padding: 0 5%;
+      }
+
+      .nav-links {
+
+        display: none;
+      }
+
+      .hero {
+
+        padding: 120px 6% 80px;
+      }
+
+      .hero h1 {
+
+        letter-spacing: -4px;
+      }
+
+      section {
+
+        padding: 90px 6%;
+      }
+
+      .section-header {
+
+        display: block;
+      }
+
+      .section-description {
+
+        margin-top: 20px;
+      }
+
+      .works {
+
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+
+        grid-template-columns: 1fr;
+      }
+
+      .service {
+
+        border-right: none;
+
+        border-bottom: 1px solid #333;
+      }
+
+      footer {
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav>
+
+    <a href="#home" class="logo">
+      MOHAB<span>.</span>
+    </a>
+
+    <ul class="nav-links">
+
+      <li>
+        <a href="#home">HOME</a>
+      </li>
+
+      <li>
+        <a href="#editing">MY WORK</a>
+      </li>
+
+      <li>
+        <a href="#commercial">COMMERCIAL</a>
+      </li>
+
+    </ul>
+
+    <a
+      href="https://wa.me/201220873973"
+      class="contact-btn"
+      target="_blank"
+      rel="noopener"
+    >
+      LET'S TALK
+    </a>
+
+  </nav>
+
+
+
+  <!-- ================= HERO ================= -->
+
+  <main id="home">
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="small-title">
+          VIDEO EDITOR
+        </div>
+
+        <h1>
+          MOHAB<span>.</span>
+        </h1>
+
+        <p>
+          I create high-quality video edits that turn
+          ideas into powerful visual stories.
+          From short-form content to commercial videos,
+          I make every frame count.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a
+            href="#editing"
+            class="primary-btn"
+          >
+            VIEW MY WORK
+          </a>
+
+          <a
+            href="https://wa.me/201220873973"
+            class="secondary-btn"
+            target="_blank"
+            rel="noopener"
+          >
+            CONTACT ME
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= MARQUEE ================= -->
+
+    <div class="marquee">
+
+      <div class="marquee-track">
+
+        <span>VIDEO EDITING</span>
+        <strong>✦</strong>
+
+        <span>COMMERCIAL</span>
+        <strong>✦</strong>
+
+        <span>SHORT FORM</span>
+        <strong>✦</strong>
+
+        <span>MOTION GRAPHICS</span>
+        <strong>✦</strong>
+
+        <span>VIDEO EDITING</span>
+        <strong>✦</strong>
+
+        <span>COMMERCIAL</span>
+        <strong>✦</strong>
+
+        <span>SHORT FORM</span>
+        <strong>✦</strong>
+
+        <span>MOTION GRAPHICS</span>
+        <strong>✦</strong>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= MY WORK ================= -->
+
+    <section id="editing">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-number">
+            01 / VIDEO EDITING
+          </div>
+
+          <h2 class="section-title">
+            MY WORK
+          </h2>
+
+        </div>
+
+        <p class="section-description">
+
+          A selection of my latest video editing
+          projects. Watch my work directly below.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="works">
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/video1.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              SHORT FORM
+            </div>
+
+            <h3>
+              Social Media Edit
+            </h3>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/video2.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              YOUTUBE
+            </div>
+
+            <h3>
+              YouTube Edit
+            </h3>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 3 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/video3.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              CINEMATIC
+            </div>
+
+            <h3>
+              Cinematic Edit
+            </h3>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- VIDEO 4 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/video4.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              CREATIVE
+            </div>
+
+            <h3>
+              Creative Edit
+            </h3>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= COMMERCIAL ================= -->
+
+    <section id="commercial">
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-number">
+            02 / COMMERCIAL
+          </div>
+
+          <h2 class="section-title">
+            COMMERCIAL
+          </h2>
+
+        </div>
+
+        <p class="section-description">
+
+          Commercial and advertising edits
+          created to capture attention.
+
+        </p>
+
+      </div>
+
+
+
+      <div class="works">
+
+
+        <!-- COMMERCIAL VIDEO 1 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/commercial1.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              ADVERTISING
+            </div>
+
+            <h3>
+              Brand Advertisement
+            </h3>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- COMMERCIAL VIDEO 2 -->
+
+        <div class="work">
+
+          <video
+            controls
+            preload="metadata"
+            playsinline
+          >
+
+            <source
+              src="videos/commercial2.mp4"
+              type="video/mp4"
+            >
+
+            Your browser does not support video.
+
+          </video>
+
+          <div class="work-info">
+
+            <div class="work-category">
+              COMMERCIAL
+            </div>
+
+            <h3>
+              Business Campaign
+            </h3>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section>
+
+      <div class="section-header">
+
+        <div>
+
+          <div class="section-number">
+            03 / SERVICES
+          </div>
+
+          <h2 class="section-title">
+            WHAT I DO
+          </h2>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="services">
+
+
+        <div class="service">
+
+          <div class="service-number">
+            01
+          </div>
+
+          <h3>
+            Video Editing
+          </h3>
+
+          <p>
+            Professional editing for YouTube,
+            TikTok, Instagram and other platforms.
+          </p>
+
+        </div>
+
+
+
+        <div class="service">
+
+          <div class="service-number">
+            02
+          </div>
+
+          <h3>
+            Commercials
+          </h3>
+
+          <p>
+            Eye-catching advertisements and
+            promotional videos for brands.
+          </p>
+
+        </div>
+
+
+
+        <div class="service">
+
+          <div class="service-number">
+            03
+          </div>
+
+          <h3>
+            Motion Graphics
+          </h3>
+
+          <p>
+            Dynamic titles, animations and
+            visual effects that make videos stand out.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section
+      class="cta"
+      id="contact"
+    >
+
+      <div class="section-number">
+        HAVE A PROJECT?
+      </div>
+
+      <h2>
+
+        LET'S MAKE<br>
+
+        SOMETHING
+        <span>GREAT.</span>
+
+      </h2>
+
+
+      <a
+        href="https://wa.me/201220873973"
+        class="primary-btn"
+        target="_blank"
+        rel="noopener"
+      >
+
+        CONTACT ME
+
+      </a>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div>
+
+      © 2026
+      <strong>Mohab</strong>.
+      All rights reserved.
+
+    </div>
+
+    <div>
+
+      Video Editor
+
+    </div>
+
+  </footer>
+
+
+</body>
+
+</html>
